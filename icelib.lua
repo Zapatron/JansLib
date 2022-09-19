@@ -1,5 +1,4 @@
 -- // variables
-local library = {}
 local pages = {}
 local sections = {}
 local toggles = {}
