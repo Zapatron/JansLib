@@ -11,6 +11,9 @@ if getgenv().library then
     getgenv().library:Unload()
 end
 
+local library = {design = getgenv().design == "uwuware" and "kali" or "uwuware", tabs = {}, draggable = true, flags = {}, title = "Osiris | Free Version" ,open = false, popup = nil, instances = {}, connections = {}, 
+ options = {}, notifications = {}, tabSize = 0, theme = {}, foldername = "asylum", fileext = ".cfg"}
+
 getgenv().library = library
 
 --Locals
