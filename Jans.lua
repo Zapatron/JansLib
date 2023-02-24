@@ -12,7 +12,7 @@ if getgenv().library then
 end
 
 local library = {design = getgenv().design == "uwuware" and "kali" or "uwuware", tabs = {}, draggable = true, flags = {}, title = "isaacwhy plushies.international" ,open = false, popup = nil, instances = {}, connections = {}, 
- options = {}, notifications = {}, tabSize = 0, theme = {}, foldername = "asylum", fileext = ".cfg"}
+ options = {}, notifications = {}, tabSize = 0, theme = {}, foldername = "monarch.cool", fileext = ".cfg"}
 
 getgenv().library = library
 
