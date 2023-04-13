@@ -11,7 +11,7 @@ if getgenv().library then
     getgenv().library:Unload()
 end
 
-local library = {design = getgenv().design == "uwuware" and "kali" or "uwuware", tabs = {}, draggable = true, flags = {}, title = "happyhop" ,open = false, popup = nil, instances = {}, connections = {}, 
+local library = {design = getgenv().design == "uwuware" and "kali" or "uwuware", tabs = {}, draggable = true, flags = {}, title = "happyhop", open = false, popup = nil, instances = {}, connections = {}, 
  options = {}, notifications = {}, tabSize = 0, theme = {}, foldername = "monarch.cool", fileext = ".cfg"}
 
 getgenv().library = library
