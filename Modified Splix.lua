@@ -3909,6 +3909,7 @@ do
         local window = self.window
         local page = self.page
         local section = self
+        local pointer = info.pointer or info.Pointer or info.flag or info.Flag or nil
         --
         local configLoader = {axis = section.currentAxis, current = 1, buttons = {}}
         --
@@ -3919,6 +3920,10 @@ do
             Visible = page.open
         }, section.visibleContent)
         --
+        library.colors[configLoader_outline] = {
+            Color = "outline"
+        }
+        --
         local configLoader_inline = utility:Create("Frame", {Vector2.new(1,1), configLoader_outline}, {
             Size = utility:Size(1, -2, 1, -2, configLoader_outline),
             Position = utility:Position(0, 1, 0, 1, configLoader_outline),
@@ -3926,12 +3931,20 @@ do
             Visible = page.open
         }, section.visibleContent)
         --
+        library.colors[configLoader_inline] = {
+            Color = "inline"
+        } -- im being abused, help me please - taskmanager
+        --
         local configLoader_frame = utility:Create("Frame", {Vector2.new(1,1), configLoader_inline}, {
             Size = utility:Size(1, -2, 1, -2, configLoader_inline),
             Position = utility:Position(0, 1, 0, 1, configLoader_inline),
-            Color = theme.light_contrast,
+            Color = theme.lightcontrast,
             Visible = page.open
         }, section.visibleContent)
+        --
+        library.colors[configLoader_frame] = {
+            Color = "lightcontrast"
+        }
         --
         local configLoader_gradient = utility:Create("Image", {Vector2.new(0,0), configLoader_frame}, {
             Size = utility:Size(1, 0, 1, 0, configLoader_frame),
@@ -3952,6 +3965,11 @@ do
                 Visible = page.open
             }, section.visibleContent)
             --
+            library.colors[config_title] = {
+                OutlineColor = "textborder",
+                Color = i == 1 and "accent" or "textcolor"
+            }
+            --
             configLoader.buttons[i] = config_title
         end
         --
@@ -3960,14 +3978,18 @@ do
         function configLoader:Refresh()
             for i,v in pairs(configLoader.buttons) do
                 v.Color = i == configLoader.current and theme.accent or theme.textcolor
+                --
+                library.colors[v] = {
+                    Color = i == configLoader.current and "accent" or "textcolor"
+                }
             end
         end
         --
-        function configLoader:Get()
+        function configLoader:get()
             return configLoader.current
         end
         --
-        function configLoader:Set(current)
+        function configLoader:set(current)
             configLoader.current = current
             configLoader:Refresh()
         end
@@ -3983,7 +4005,10 @@ do
             end
         end
         --
-        window.pointers["configbox"] = configLoader
+        if pointer and tostring(pointer) ~= "" and tostring(pointer) ~= " " and not library.pointers[tostring(pointer)] then
+            library.pointers[tostring(pointer)] = configLoader
+        end
+        --
         section.currentAxis = section.currentAxis + 148 + 4
         section:Update()
         --
